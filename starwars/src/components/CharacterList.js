@@ -1,23 +1,27 @@
-import React from 'react';
-import {
-  Card, CardImg, CardText, CardBody,
-  CardTitle, CardSubtitle, Button
-} from 'reactstrap';
+import React, { useState, useEffect } from "react";
+import CharacterCard from "./CharacterCard";
+import axios from "axios";
 
-const Example = (props) => {
-  return (
-    <div>
-      <Card>
-        <CardImg top width="100%" src="/assets/318x180.svg" alt="Card image cap" />
-        <CardBody>
-          <CardTitle>Card title</CardTitle>
-          <CardSubtitle>Card subtitle</CardSubtitle>
-          <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-          <Button>Button</Button>
-        </CardBody>
-      </Card>
-    </div>
-  );
-};
+export default function CharacterList(){
+    const [character, setCharacter] = useState([]);
 
-export default Example;
+    useEffect(() => {
+        axios
+        .get()
+        .then (response => {
+            const character = response.data.results;
+            console.log("Wars", character);
+            setCharacter(character);
+        })
+        .catch (error => {
+            console .log ("The data was not returned", error);
+        });
+    }, []);
+    return (
+        <div className = "Wars">
+            {character.map(item => {
+                return <CharacterCard name={item.name} hair_color={item.hair_color} gender={item.gender}/>
+            })}
+        </div>
+    )
+}
