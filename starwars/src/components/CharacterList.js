@@ -7,7 +7,7 @@ export default function CharacterList(){
 
     useEffect(() => {
         axios
-        .get('http https://swapi.co/api/people/')
+        .get('https://swapi.co/api/people/')
         .then (response => {
             const character = response.data.results;
             console.log("Wars", character);

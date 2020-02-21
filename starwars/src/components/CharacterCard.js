@@ -5,6 +5,7 @@ import {
 } from 'reactstrap';
 
 const CharacterCard = (props) => {
+    console.log(props);
   return (
     <div>
       <Card>
